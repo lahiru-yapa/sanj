@@ -20,6 +20,7 @@ use App\Http\Controllers\BinProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\RealCategoryController;
 use App\Http\Controllers\BikeController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\WarehouseTransferController;
 
 /*
@@ -175,6 +176,8 @@ Route::get('product-return/{id}/{product_id}/edit', [ReturnProductController::cl
 
         Route::resource('real-categories', RealCategoryController::class);
         Route::resource('bikes', BikeController::class);
+        Route::resource('department', DepartmentController::class);
+
 
         Route::get('/all-financial', [ExpenseController::class, 'index'])->name('allfinancial');
         Route::get('/add-financial', [ExpenseController::class, 'create'])->name('addfinancial');
