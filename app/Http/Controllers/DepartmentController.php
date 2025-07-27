@@ -26,7 +26,7 @@ class DepartmentController extends Controller
     { 
          return view('Department.create');
     }
-
+// ..
     /**
      * Store a newly created resource in storage.
      */
