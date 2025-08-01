@@ -51,7 +51,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Description</th>
+                                                  
                                                     <th>Code</th>
                                                 </tr>
                                             </thead>
@@ -60,7 +60,6 @@
                                                 <tr>
                                                    
                                                 <td>{{$brand->name}}</td>
-                                                    <td>{{$brand->description}}</td>
                                                     <td>{{$brand->sku}}</td>
                                                   
                                                     <td>

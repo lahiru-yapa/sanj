@@ -41,9 +41,9 @@
                                                 @enderror
                                             </div>
                                             <div class="input-field col s6">
-                                            <input id="description" name="description" type="text" class="validate"
+                                            <input id="code" name="code" type="text" class="validate"
                                                     value="{{ old('description') }}">
-                                                <label for="phone">Description</label>
+                                                <label for="phone">Code</label>
                                                 @error('description')
                                                 <span class="red-text">{{ $message }}</span>
                                                 @enderror

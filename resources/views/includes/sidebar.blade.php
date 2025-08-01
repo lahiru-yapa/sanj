@@ -145,10 +145,18 @@
                     Department</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
-                        <li><a href="{{ route('add-brand') }}">Add Department</a></li>
+                        <li><a href="{{ route('categories.index') }}">Department</a></li>
                     </ul>
                 </div>
             </li>
+            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
+                Sub Department</a>
+            <div class="collapsible-body left-sub-menu">
+                <ul>
+                    <li><a href="{{ route('department.index') }}">Sub Department</a></li>
+                </ul>
+            </div>
+        </li>
             <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-hard-hat"></i>
  <!-- Tire icon -->
 
@@ -168,14 +176,7 @@
                 </div>
             </li>
 
-            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
-                    Sub Department</a>
-                <div class="collapsible-body left-sub-menu">
-                    <ul>
-                        <li><a href="{{ route('department.index') }}">Sub Department</a></li>
-                    </ul>
-                </div>
-            </li>
+           
              <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-exchange-alt"></i> <!-- exchange icon -->
 
                     Warehouse Transfer</a>

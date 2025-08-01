@@ -10,8 +10,8 @@ class BrandController extends Controller
       // Show list of brands
     public function index()
     {
+       
        $brands = Category::where('delete_flag', 0)->get();
-
         return view('brands.index', compact('brands'));
     }
 
@@ -27,7 +27,6 @@ public function store(Request $request)
     // Validate the input
     $request->validate([
         'name' => 'required|unique:categories,name|max:255',
-        'description' => 'nullable|string',
     ]);
 
     // Generate category code
@@ -36,12 +35,15 @@ public function store(Request $request)
     // Create the category
     Category::create([
         'name' => $request->name,
-        'sku' => $categoryCode, 
-        'description' => $request->description,
+        'sku' => $request->code, 
         'delete_flag' => 0, // Default to active (1) if not provided
     ]);
 
-    return redirect()->route('categories.index')->with('success', 'Category added successfully!');
+    $brands = Category::where('delete_flag', 0)->get();
+
+    return view('brands.index', compact('brands'));
+
+   
 }
 
     // Show edit form
@@ -66,13 +68,15 @@ public function store(Request $request)
         return redirect()->route('brands.index')->with('success', 'Brand updated successfully!');
     }
 
-    // Delete brand
-    public function destroy($id)
-    {
-      
-      $brand = Category::findOrFail($id);
-    $brand->delete_flag = 1;
-    $brand->save();
-        return redirect()->route('brands.index')->with('success', 'Brand deleted successfully!');
-    }
+  // Delete brand permanently
+public function destroy($id)
+{
+    $brand = Category::findOrFail($id);
+    $brand->delete(); // Permanently deletes the record from the database
+
+    $brands = Category::where('delete_flag', 0)->get();
+
+    return view('brands.index', compact('brands'));
+}
+
 }
