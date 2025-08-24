@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-             $table->string('sku');
-             $table->text('delete_flag')->default(0);// Address of the shop
+            $table->string('name')->nullable(); // Lowercase column names recommended
+            $table->unsignedBigInteger('category_id')->nullable(); // Correct column
             $table->timestamps();
+        
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
-     
+        
     }
 
     /**
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('departments');
     }
 };

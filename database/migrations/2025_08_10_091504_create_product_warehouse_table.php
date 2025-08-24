@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('product_warehouse', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('warehouse_id');
-             $table->unsignedBigInteger('grn_item_id');
+           
+            $table->unsignedBigInteger('grn_item_id');
             $table->integer('stock')->default(0); // Stock per warehouse
+            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
+            $table->foreignId('warehouse_id')->nullable()->constrained('warehouses')->onDelete('set null');
             $table->timestamps();
         
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('warehouse_id')->references('id')->on('warehouses')->onDelete('cascade');
+          
+        
           });
     }
 

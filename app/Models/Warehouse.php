@@ -28,4 +28,10 @@ class Warehouse extends Model
        {
            return $this->hasMany(Invoice::class, 'warehouse_id');
        }
+
+       public function rackDetails()
+       {
+           return $this->hasMany(RackDetail::class);
+       }
+       
 }

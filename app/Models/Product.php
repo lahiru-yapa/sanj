@@ -13,16 +13,36 @@ class Product extends Model
         'name',
         'sku',
         'description',
-        'price',
-        'stock',
         'category_id',
         'supplier_id',
         'photo',
-        'sell_price',
-        'real_category',
-        'bike',
+        'real_category_id',
+        'bikes_id',
+        'department_id',
+        'low_stock',
+        'rack_name',
     ];
+
+    public function realCategory()
+    {
+        return $this->belongsTo(RealCtegorie::class, 'real_category_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function bike()
+    {
+        return $this->belongsTo(Bike::class, 'department_id');
+    }
     
+    public function rackDetail()
+    {
+        return $this->belongsTo(RackDetail::class, 'department_id');
+    }
+    
+
       public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id'); 
@@ -49,4 +69,8 @@ class Product extends Model
                     ->withPivot('stock')
                     ->withTimestamps();
     }
+
+
+
+
 }

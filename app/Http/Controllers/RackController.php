@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\RackDetail;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
-use App\Models\RealCtegorie;
 
-class RealCategoryController extends Controller
+class RackController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $realCtegorie = RealCtegorie::all();
-        return view('realCategory.index', compact('realCtegorie'));
+        $rack = RackDetail::get();
+        return view('Rack.index', compact('rack'));
     }
 
     /**
@@ -20,7 +21,8 @@ class RealCategoryController extends Controller
      */
     public function create()
     {
-        return view('realCategory.create');
+        $warehouse = Warehouse::get();
+        return view('Rack.create', compact('warehouse'));
     }
 
     /**
@@ -28,12 +30,15 @@ class RealCategoryController extends Controller
      */
     public function store(Request $request)
     {
-           $request->validate([
-            'name' => 'required',
-        ]);
-        RealCtegorie::create($request->all());
-        return redirect()->route('real-categories.index');
-
+        RackDetail::create([
+        'rack_name' => $request->name,
+        'rack_code'=>$request->rackCode,
+        'warehouse_id'=>$request->warehouse_id,
+        'row_number'=>$request->row_number,
+        'column_number'=>$request->column_number,
+           ]);
+          
+           return redirect()->route('rack.index');
     }
 
     /**
@@ -65,10 +70,12 @@ class RealCategoryController extends Controller
      */
     public function destroy(string $id)
     {
+     
+        $rack = RackDetail::find($id);
+
+        $rack->delete();
+        $rack = RackDetail::get();
+        return redirect()->route('rack.index');
       
-        $category = RealCtegorie::findOrFail($id);
-        $category->delete();
-        
-        return redirect()->route('real-categories.index');
     }
 }

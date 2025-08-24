@@ -1,39 +1,46 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Department;
 use App\Models\RealCtegorie;
 
-class RealCategoryController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
+    */
     public function index()
     {
-        $realCtegorie = RealCtegorie::all();
-        return view('realCategory.index', compact('realCtegorie'));
+        $department = Department::get();
+         return view('Department.index', compact('department'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('realCategory.create');
+    { 
+        $department = Category::all();
+         return view('Department.create', compact('department'));
     }
-
+// ..
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-           $request->validate([
-            'name' => 'required',
-        ]);
-        RealCtegorie::create($request->all());
-        return redirect()->route('real-categories.index');
 
+        Department::create([
+            'name' => $request->name,
+            'category_id'=>$request->department_id,
+        ]);
+         $department = Department::all();
+
+      
+         return view('Department.index', compact('department'));
     }
 
     /**
@@ -65,10 +72,11 @@ class RealCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-      
-        $category = RealCtegorie::findOrFail($id);
+        
+        $category = Department::findOrFail($id);
         $category->delete();
         
-        return redirect()->route('real-categories.index');
+        $department = Department::all();
+         return view('Department.index', compact('department'));
     }
 }

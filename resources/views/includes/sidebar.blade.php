@@ -55,6 +55,7 @@
                 <div class="collapsible-body left-sub-menu">
                     <ul>
                         <li><a href="{{ route('sales.report.index') }}">Reports</a></li>
+                        <li><a href="{{ route('products.stock') }}"> Stock Products</a></li>
                         <li><a href="{{ route('products.lowstock') }}">Low Stock Products</a></li>
                     </ul>
                 </div>
@@ -142,14 +143,21 @@
             </li>
 
             <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
-
-                    Brand</a>
+                    Department</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
-                        <li><a href="{{ route('add-brand') }}">Add Brand</a></li>
+                        <li><a href="{{ route('categories.index') }}">Department</a></li>
                     </ul>
                 </div>
             </li>
+            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
+                Sub Department</a>
+            <div class="collapsible-body left-sub-menu">
+                <ul>
+                    <li><a href="{{ route('sub-department.index') }}">Sub Department</a></li>
+                </ul>
+            </div>
+        </li>
             <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-hard-hat"></i>
  <!-- Tire icon -->
 
@@ -161,14 +169,22 @@
                 </div>
             </li>
              <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
-
-                    Bikes</a>
+                    Sub Category</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
-                        <li><a href="{{ route('bikes.index') }}">Add Bike</a></li>
+                        <li><a href="{{ route('bikes.index') }}">Sub Category</a></li>
                     </ul>
                 </div>
             </li>
+            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
+                Rack</a>
+            <div class="collapsible-body left-sub-menu">
+                <ul>
+                    <li><a href="{{ route('rack.index') }}">Rack</a></li>
+                </ul>
+            </div>
+        </li>
+           
              <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-exchange-alt"></i> <!-- exchange icon -->
 
                     Warehouse Transfer</a>

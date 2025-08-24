@@ -20,7 +20,7 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#">Sub Category </a>
+                        <li class="active-bre"><a href="#">Sub Department</a>
                         </li>
                     </ul>
                 </div>
@@ -33,9 +33,10 @@
                                 </div>
 
                                <div class="inn-title grid-container">
-    <h4 class="mb-0">Sub Category</h4>
-    <a href="{{ route('bikes.create') }}" class="btn btn-primary">Sub Category</a>
+    <h4 class="mb-0">Sub Department Details</h4>
+    <a href="{{ route('sub-department.create') }}" class="btn btn-primary">Add Sub Department</a>
 </div>
+
                                 <style>
                                 .grid-container {
                                     display: grid;
@@ -58,16 +59,17 @@
                                             <thead>
                                                 <tr>
                                                     <th>name</th>
-
+                                                    <th>Department</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($bikes as $bike)
+                                                @foreach($department as $department)
                                                 <tr>
-                                                    <td>{{ $bike->name }}</td>
-                                                    <td>{{ $bike->realCategorie->name ?? 'No Category' }}</td>
-                                                <td>
-    <form action="{{ route('bikes.destroy', $bike->id) }}" method="POST" style="display:inline;">
+                                                    <td>{{ $department->name }}
+                                                    <td>{{ $department->category->name ?? 'No Category' }}</td>
+                                                    </td>
+<td>
+    <form action="{{ route('sub-department.destroy', $department->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('DELETE')
         <button type="submit" style="border: none; background: none; color: red;">

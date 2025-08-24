@@ -20,7 +20,9 @@ use App\Http\Controllers\BinProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\RealCategoryController;
 use App\Http\Controllers\BikeController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\WarehouseTransferController;
+use App\Http\Controllers\RackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,7 +140,9 @@ Route::get('product-return/{id}/{product_id}/edit', [ReturnProductController::cl
         Route::post('/product/edit', [ProductController::class, 'editproduct'])->name('product.editProduct');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
         Route::get('product/{id}/view', [ProductController::class, 'view'])->name('product.view');
+        Route::get('/admin/products/stock', [ProductController::class, 'stock'])->name('products.stock');
         Route::get('/admin/products/low-stock', [ProductController::class, 'lowStock'])->name('products.lowstock');
+         
         Route::get('/admin/stock/low/ajax', [ProductController::class, 'lowStockAjax'])->name('stock.low.ajax');
 
 
@@ -165,16 +169,19 @@ Route::get('product-return/{id}/{product_id}/edit', [ReturnProductController::cl
         Route::get('/get-filtered-products', [ProductController::class, 'getFilteredProducts'])->name('get.filtered.products');
         Route::get('/get-filtered-products2', [ProductController::class, 'getFilteredProducts2'])->name('get.filtered.products2');
 
-        Route::get('/brand/add', [BrandController::class, 'create'])->name('add-brand');
-        Route::get('/brand/index', [BrandController::class, 'index'])->name('categories.index');
-        Route::post('/brand/store', [BrandController::class, 'store'])->name('store-brand');
-        Route::get('/brand', [BrandController::class, 'index'])->name('brands.index');
-        Route::get('/brand/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
-        Route::post('/brand/{id}/update', [BrandController::class, 'update'])->name('brand.update');
-        Route::get('/brand/{id}/delete', [BrandController::class, 'destroy'])->name('brand.delete');
+        Route::get('/department/add', [BrandController::class, 'create'])->name('add-brand');
+        Route::get('/department/index', [BrandController::class, 'index'])->name('categories.index');
+        Route::post('/department/store', [BrandController::class, 'store'])->name('store-brand');
+        Route::get('/department', [BrandController::class, 'index'])->name('brands.index');
+        Route::get('/department/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+        Route::post('/department/{id}/update', [BrandController::class, 'update'])->name('brand.update');
+        Route::get('/department/{id}/delete', [BrandController::class, 'destroy'])->name('brand.delete');
 
         Route::resource('real-categories', RealCategoryController::class);
         Route::resource('bikes', BikeController::class);
+        Route::resource('rack', RackController::class);
+        Route::resource('sub-department', DepartmentController::class);
+
 
         Route::get('/all-financial', [ExpenseController::class, 'index'])->name('allfinancial');
         Route::get('/add-financial', [ExpenseController::class, 'create'])->name('addfinancial');

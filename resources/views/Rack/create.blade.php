@@ -18,7 +18,7 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#"> Sub Category</a>
+                        <li class="active-bre"><a href="#">Rack</a>
                         </li>
                     </ul>
                 </div>
@@ -27,23 +27,38 @@
                         <div class="col-md-12">
                             <div class="box-inn-sp">
                                 <div class="inn-title">
-                                    <h4>Add Sub Category</h4>
+                                    <h4>Add Rack</h4>
                                 </div>
                                 <div class="tab-inn">
-                                    <form action="{{ route('bikes.store') }}" method="POST">
+                                    <form action="{{ route('rack.store') }}" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <div class="input-field col s6">
+                                            <div class="input-field col s4">
                                                 <input name="name" type="text" class="validate">
                                                 <label for="name">Name</label>
                                             </div>
-                                            <div class="input-field col s6">
-                                                <select name="categorie_id">
-                                                <option value="" disabled selected>Select Sub Category</option>
-                                                    @foreach ($realCtegorie as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <div class="input-field col s4">
+                                                <input name="rackCode" type="text" class="validate">
+                                                <label for="name">Rack Code</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <select name="warehouse_id" id="department_id" class="browser-default" required>
+                                                    <option value="">-- Select Warehouse --</option>
+                                                    @foreach($warehouse as $dept)
+                                                        <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('department_id')
+                                                    <span class="red-text">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input name="row_number" type="text" class="validate">
+                                                <label for="name">row_number(optional)</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input name="column_number" type="text" class="validate">
+                                                <label for="name">column_number(optional)</label>
                                             </div>
                                         </div>
 

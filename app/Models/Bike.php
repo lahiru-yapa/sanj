@@ -12,6 +12,7 @@ class Bike extends Model
         'brand_id', 
         'name', 
         'categorie_id',
+        'real_ctegorie_id',
     ];
     public function categorie() {
     return $this->belongsTo(Category::class);
@@ -20,5 +21,12 @@ class Bike extends Model
     public function parts() {
         return $this->belongsToMany(Part::class);
     }
+
+    public function realCategorie()
+    {
+        return $this->belongsTo(RealCtegorie::class, 'categorie_id'); // ✅ CORRECT
+    }
+    
+
 
 }

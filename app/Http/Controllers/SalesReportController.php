@@ -234,10 +234,8 @@ return response()->json([
   $products = Product::with(['category', 'grnItems' => function($query) {
         $query->select('id', 'product_id', 'set_price');
     }])
-    ->select('id', 'name', 'category_id')
     ->where('delete_flag', 0)
     ->get();
-
     $bikes =Bike::all();
     $brands = RealCtegorie::all();
     $categorys =Category::all();
