@@ -86,11 +86,11 @@
                     <select class="form-control product" id="product" name="items[0][product_id]" required>
                         <option value="" disabled selected>Select Product</option>
                         @foreach ($products as $product)
-                            <option value="{{ $product->id }}">{{ $product->name }} ({{ $product->category->name }})</option>
-                        @endforeach
+                            <option value="{{ $product->id }}">{{ $product->name }} ({{ $product->category->name }}) ({{ $product->department->name }})({{ $product->realCategory->name }})({{ $product->bike->name }})</option>
+                        @endforeach  
                     </select>
                 </div>
-            <div class="col-12 col-md-2">
+            {{-- <div class="col-12 col-md-2">
                     <label>Brand</label>
                     <select class="form-control brand" id="brand" name="items[0][brand]">
                         <option value="" disabled selected>Brand</option>
@@ -98,18 +98,15 @@
                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                         @endforeach
                     </select>
-                </div>
-            <div class="input-field col s3">
-              <input type="text" id="code" name="items[0][code]" class="validate code">
-                <label class="ls">Product Code</label>
-            </div>
+                </div> --}}
+           
             <div class="input-field col s2">
-                <input type="number" name="items[0][quantity]" class="validate" required>
-                <label class="ls">Qty</label>
+                <input type="number" name="items[0][quantity]" class="validate" required placeholder="Qty">
+             
             </div>
            <div class="input-field col s4">
-                <input type="number" name="items[0][purches]" class="validate" required>
-                <label class="ls">Purches Price</label>
+                <input type="number" name="items[0][purches]" class="validate" required placeholder="Purches Price">
+          
             </div>
             <div class="input-field col s4">
                 <input type="number" name="items[0][suplier_discount]" class="validate" required>
@@ -138,10 +135,7 @@
                 <input type="text" name="items[0][warranty_period]" class="validate">
                 <label class="ls">Warranty</label>
             </div>
-             <div class="input-field col s2">
-                <input type="text" name="items[0][rack]" class="validate">
-                <label class="ls">Rack</label>
-            </div>
+           
         
            <div class="input-field col s1">
    
@@ -293,7 +287,7 @@
     
     function saveProduct(button) {
     let item = button.closest(".product-item");
-
+   
     // Collect product data
     let formData = {
         warehouse_id: document.getElementById("warehouse_id").value,
@@ -301,8 +295,6 @@
         received_date: document.querySelector("input[name='received_date']").value,
         grn_number: document.querySelector("input[name='grn_number']").value,
         product_id: item.querySelector("select[name*='[product_id]']").value,
-        brand: item.querySelector("select[name*='[brand]']").value,
-        code: item.querySelector("input[name*='[code]']").value,
         quantity: item.querySelector("input[name*='[quantity]']").value,
         purches: item.querySelector("input[name*='[purches]']").value,
         suplier_discount: item.querySelector("input[name*='[suplier_discount]']").value,
@@ -312,7 +304,6 @@
         whole_sell_Price: item.querySelector("input[name*='[whole_sell_Price]']").value,
         retail_price: item.querySelector("input[name*='[retail_price]']").value,
         warranty_period: item.querySelector("input[name*='[warranty_period]']").value,
-        rack: item.querySelector("input[name*='[rack]']").value,
         _token: document.querySelector("input[name='_token']").value, // CSRF token
     };
  // Send AJAX request

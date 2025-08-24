@@ -26,7 +26,6 @@ return new class extends Migration
         $table->decimal('wholesale_price', 10, 2);
         $table->decimal('retail_price', 10, 2);
         $table->integer('warranty_period')->nullable();
-        $table->string('rack_id');
         $table->timestamps();
         });
     }

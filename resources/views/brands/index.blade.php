@@ -19,7 +19,7 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#">All-Brands</a>
+                        <li class="active-bre"><a href="#">All-Departments</a>
                         </li>
                     </ul>
                 </div>
@@ -28,8 +28,8 @@
                         <div class="col-md-12">
                             <div class="box-inn-sp">
                                 <div class="inn-title grid-container">
-                                <h4>Shop</h4>
-    <a href="{{ route('add-brand') }}" class="btn btn-primary">Add New Brand</a>
+                                <h4>Departments</h4>
+    <a href="{{ route('add-brand') }}" class="btn btn-primary">Add Departments</a>
 </div>
 
 <style>

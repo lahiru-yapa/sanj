@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('real_ctegories', function (Blueprint $table) {
-           $table->id();
+       
+            $table->id(); // this creates an unsignedBigInteger + primary key
             $table->string('name');
             $table->timestamps();
         });

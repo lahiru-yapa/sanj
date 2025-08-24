@@ -1,46 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\RackDetail;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Department;
-use App\Models\RealCtegorie;
 
-class DepartmentController extends Controller
+class RackController extends Controller
 {
     /**
      * Display a listing of the resource.
-    */
+     */
     public function index()
     {
-        $department = Department::get();
-         return view('Department.index', compact('department'));
+        $rack = RackDetail::get();
+        return view('Rack.index', compact('rack'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    { 
-        $department = Category::all();
-         return view('Department.create', compact('department'));
+    {
+        $warehouse = Warehouse::get();
+        return view('Rack.create', compact('warehouse'));
     }
-// ..
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-
-        Department::create([
-            'name' => $request->name,
-            'category_id'=>$request->department_id,
-        ]);
-         $department = Department::all();
-
-      
-         return view('Department.index', compact('department'));
+        RackDetail::create([
+        'rack_name' => $request->name,
+        'rack_code'=>$request->rackCode,
+        'warehouse_id'=>$request->warehouse_id,
+        'row_number'=>$request->row_number,
+        'column_number'=>$request->column_number,
+           ]);
+          
+           return redirect()->route('rack.index');
     }
 
     /**
@@ -72,11 +70,12 @@ class DepartmentController extends Controller
      */
     public function destroy(string $id)
     {
-        
-        $category = Department::findOrFail($id);
-        $category->delete();
-        
-        $department = Department::all();
-         return view('Department.index', compact('department'));
+     
+        $rack = RackDetail::find($id);
+
+        $rack->delete();
+        $rack = RackDetail::get();
+        return redirect()->route('rack.index');
+      
     }
 }

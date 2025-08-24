@@ -162,6 +162,7 @@ public function storeall(Request $request)
 }
 public function storeItem(Request $request)
 {
+
     try {
         $validated = $request->validate([
             'warehouse_id' => 'required|exists:warehouses,id',
@@ -178,9 +179,8 @@ public function storeItem(Request $request)
             'whole_sell_Price' => 'required|numeric|min:0',
             'retail_price' => 'required|numeric|min:0',
             'warranty_period' => 'nullable|string',
-            'rack' => 'nullable|string',
         ]);
-
+      
         DB::beginTransaction();
 
         // Find or create the GRN record
@@ -194,11 +194,11 @@ public function storeItem(Request $request)
                 'received_date' => $validated['received_date']
             ]
         );
-
+      
         // Calculate total price (before discount)
         $unit_price = $validated['purches'];
         $total_price = $validated['quantity'] * $unit_price;
-
+   
         // Create a new GRN item
         $grnItem = new GrnItem();
         $grnItem->grn_id = $grn->id;
@@ -214,9 +214,9 @@ public function storeItem(Request $request)
         $grnItem->wholesale_price = $validated['whole_sell_Price'];
         $grnItem->retail_price = $validated['retail_price'];
         $grnItem->warranty_period = $validated['warranty_period'];
-        $grnItem->rack_id = $validated['rack'];
         $grnItem->save();
-
+      
+      
         // ✅ Update or insert stock into product_warehouse
         ProductWarehouse::updateOrInsert(
             [
@@ -234,6 +234,7 @@ public function storeItem(Request $request)
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         // Handle validation errors
+      
         $errors = $e->validator->errors();
         $message = $errors->first() . " (and " . ($errors->count() - 1) . " more errors)";
         return response()->json([
@@ -243,7 +244,6 @@ public function storeItem(Request $request)
         ], 422);
     } catch (\Exception $e) {
         DB::rollBack();
-        Log::error('Error storing GRN item: ' . $e->getMessage());
         return response()->json([
             'success' => false,
             'message' => 'Failed to store item, please try again later'
@@ -260,13 +260,12 @@ public function storeItem(Request $request)
         $brands = Category::where('delete_flag', 0)->get();
         $warehouses = Warehouse::all();
         $supllier = Supplier::where('delete_flag', 0)->get();
-        $products = Product::with('category')->where('delete_flag', 0)->get();
+        $products = Product::where('delete_flag', 0)->get();
         return view('grn.create', compact('warehouses','supllier','products','brands'));
     }
 
  public function createItem(Request $request)
 {  
-   
     // ✅ Validation
     $validated = $request->validate([
         'grn_id' => 'required', // You missed this!

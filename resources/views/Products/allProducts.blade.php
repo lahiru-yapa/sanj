@@ -52,11 +52,10 @@
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Sku</th>
-                                                    <th>Description</th>
-                                                  
-                                                    <th>Category</th>
-                                                    <th>Edit</th>
+                                                    <th>Department</th>
+                                                    {{-- <th>Edit</th> --}}
                                                     <th>View</th>
+                                                    <th>Edit</th>
                                                     <th>Delete</th>
                                                 </tr>
                                             </thead>
@@ -66,14 +65,16 @@
                                                
                                                 <td>{{$product->name}}</td>
                                                     <td>{{$product->sku}}</td>
-                                                    <td>{{$product->description}}</td>
                                                     <td>{{$product->category->name}}</td>
-                                                    <td>
+                                                    {{-- <td>
                                                     <a href="{{ route('product.edit', $product->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                    </td>
+                                                    </td> --}}
                                                     <td>
                                                     <a href="{{ route('product.view', $product->id) }}"><i class="fas fa-eye"></i></a>
                                                     </td>
+                                                    <td>
+                                                        <a href="{{ route('product.edit', $product->id) }}"><i class="fas fa-eye"></i></a>
+                                                        </td>
                                                     <td>
                                                      <a href="{{ route('product.delete',$product->id) }}"><i class="fas fa-trash"></i></a>
                                                     </td>

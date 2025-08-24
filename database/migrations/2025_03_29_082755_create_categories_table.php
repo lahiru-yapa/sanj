@@ -18,6 +18,8 @@ return new class extends Migration
              $table->text('delete_flag')->default(0);// Address of the shop
             $table->timestamps();
         });
+
+     
     }
 
     /**

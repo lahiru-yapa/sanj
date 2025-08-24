@@ -15,6 +15,15 @@ class Category extends Model
         'description', 
         'delete_flag',
     ];
+
+     /**
+     * A Category has many Departments
+     */
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }
+    
    public function products()
     {
         return $this->hasMany(Product::class, 'category_id', 'id'); // Foreign key should be 'category_id'

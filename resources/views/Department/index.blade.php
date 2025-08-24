@@ -20,7 +20,7 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#">Department</a>
+                        <li class="active-bre"><a href="#">Sub Department</a>
                         </li>
                     </ul>
                 </div>
@@ -33,8 +33,8 @@
                                 </div>
 
                                <div class="inn-title grid-container">
-    <h4 class="mb-0">Department Details</h4>
-    <a href="{{ route('department.create') }}" class="btn btn-primary">Add New Department</a>
+    <h4 class="mb-0">Sub Department Details</h4>
+    <a href="{{ route('sub-department.create') }}" class="btn btn-primary">Add Sub Department</a>
 </div>
 
                                 <style>
@@ -59,16 +59,17 @@
                                             <thead>
                                                 <tr>
                                                     <th>name</th>
-
+                                                    <th>Department</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach($department as $department)
                                                 <tr>
-                                                    <td>{{ $department->Name }}
+                                                    <td>{{ $department->name }}
+                                                    <td>{{ $department->category->name ?? 'No Category' }}</td>
                                                     </td>
 <td>
-    <form action="{{ route('department.destroy', $department->id) }}" method="POST" style="display:inline;">
+    <form action="{{ route('sub-department.destroy', $department->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('DELETE')
         <button type="submit" style="border: none; background: none; color: red;">

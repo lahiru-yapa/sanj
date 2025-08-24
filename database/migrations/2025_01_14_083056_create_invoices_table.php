@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('invoice_number');
             $table->decimal('total_amount', 10, 2);
             $table->decimal('paid_amount', 10, 2)->default(0);
-            $table->decimal('remaining_balance ', 10, 2);
             $table->string('paid_status')->default('unpaid');
             $table->date('due_date');
              $table->string('discount')->nullable();
@@ -27,6 +26,7 @@ return new class extends Migration
             $table->date('payment_date')->nullable();
             $table->text('delete_flag')->default(0);// Address of the shop
             $table->text('description')->nullable();
+            $table->decimal('remaining_balance', 10, 2)->default(0);
             $table->timestamps();
         });
     }

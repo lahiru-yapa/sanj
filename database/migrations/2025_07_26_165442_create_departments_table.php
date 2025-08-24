@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('Name')->nullable();
+            $table->string('name')->nullable(); // Lowercase column names recommended
+            $table->unsignedBigInteger('category_id')->nullable(); // Correct column
             $table->timestamps();
+        
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
+
+        
     }
 
     /**

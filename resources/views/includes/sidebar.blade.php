@@ -55,6 +55,7 @@
                 <div class="collapsible-body left-sub-menu">
                     <ul>
                         <li><a href="{{ route('sales.report.index') }}">Reports</a></li>
+                        <li><a href="{{ route('products.stock') }}"> Stock Products</a></li>
                         <li><a href="{{ route('products.lowstock') }}">Low Stock Products</a></li>
                     </ul>
                 </div>
@@ -153,7 +154,7 @@
                 Sub Department</a>
             <div class="collapsible-body left-sub-menu">
                 <ul>
-                    <li><a href="{{ route('department.index') }}">Sub Department</a></li>
+                    <li><a href="{{ route('sub-department.index') }}">Sub Department</a></li>
                 </ul>
             </div>
         </li>
@@ -175,7 +176,14 @@
                     </ul>
                 </div>
             </li>
-
+            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-bicycle"></i>  <!-- Bicycle icon -->
+                Rack</a>
+            <div class="collapsible-body left-sub-menu">
+                <ul>
+                    <li><a href="{{ route('rack.index') }}">Rack</a></li>
+                </ul>
+            </div>
+        </li>
            
              <li><a href="javascript:void(0)" class="collapsible-header"><i class="fas fa-exchange-alt"></i> <!-- exchange icon -->
 

@@ -35,7 +35,7 @@
                                         @csrf
 
                                         <div class="row">
-                                            <div class="input-field col s4">
+                                            <div class="input-field col s6">
                                                 <input id="phone" name="name" type="text" class="validate"
                                                     value="{{ old('name') }}">
                                                 <label for="phone">Name</label>
@@ -43,15 +43,15 @@
                                                 <span class="red-text">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                            <div class="input-field col s4">
-                                            <input id="phone" name="description" type="text" class="validate"
+                                            <div class="input-field col s6">
+                                            <input id="description" name="description" type="text" class="validate"
                                                     value="{{ old('description') }}">
                                                 <label for="phone">Description</label>
                                                 @error('phone')
                                                 <span class="red-text">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                           <div class="input-field col s4">
+                                           <div class="input-field col s6">
                                             <input id="code" name="code" type="text" class="validate"
                                                     value="{{ old('code') }}">
                                                 <label for="phone">Product Code</label>
@@ -59,6 +59,16 @@
                                                 <span class="red-text">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            
+                                            <div class="input-field col s6">
+                                                <input id="low_stock" name="low_stock" type="text" class="validate"
+                                                        value="{{ old('low_stock') }}">
+                                                    <label for="phone">Product low_stock</label>
+                                                    @error('phone')
+                                                    <span class="red-text">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s4">
@@ -74,26 +84,43 @@
                                                 </div>
                                             </div>
                                             <div class="input-field col s3">
-                                                <select name="brand">
-                                                <option value="" disabled selected>Select Parts</option>
+                                                <select name="department">
+                                                <option value="" disabled selected>Select Department</option>
                                                     @foreach ($brands as $brand)
                                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="input-field col s3">
+                                                <select name="subdepartment">
+                                                <option value="" disabled selected>Select Sub Department</option>
+                                                    @foreach ($subDepartment as $subDepartment)
+                                                    <option value="{{ $subDepartment->id }}">{{ $subDepartment->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                              <div class="input-field col s3">
-                                                <select name="real_brand">
-                                                <option value="" disabled selected>Select Brand</option>
+                                                <select name="category">
+                                                <option value="" disabled selected>Select Category</option>
                                                     @foreach ($ctegories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                              <div class="input-field col s3">
-                                                <select name="bike">
-                                                <option value="" disabled selected>Select Bike</option>
+                                                <select name="subCategory">
+                                                <option value="" disabled selected>Select Sub Category</option>
                                                     @foreach ($bikes as $bike)
                                                     <option value="{{ $bike->id }}">{{ $bike->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="input-field col s3">
+                                                <select name="rack_name">
+                                                <option value="" disabled selected>Select Rack</option>
+                                                    @foreach ($rackDetail as $rackDetail)
+                                                    <option value="{{ $rackDetail->id }}">{{ $rackDetail->rack_name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

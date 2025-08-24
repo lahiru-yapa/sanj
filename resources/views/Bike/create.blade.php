@@ -18,7 +18,7 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         </li>
-                        <li class="active-bre"><a href="#"> Bikes</a>
+                        <li class="active-bre"><a href="#"> Sub Category</a>
                         </li>
                     </ul>
                 </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="box-inn-sp">
                                 <div class="inn-title">
-                                    <h4>Add New Bike</h4>
+                                    <h4>Add Sub Category</h4>
                                 </div>
                                 <div class="tab-inn">
                                     <form action="{{ route('bikes.store') }}" method="POST">
@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="input-field col s6">
                                                 <select name="categorie_id">
-                                                <option value="" disabled selected>Select Brand</option>
+                                                <option value="" disabled selected>Select Sub Category</option>
                                                     @foreach ($realCtegorie as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                     @endforeach

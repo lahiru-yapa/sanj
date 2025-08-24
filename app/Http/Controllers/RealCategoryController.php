@@ -11,7 +11,7 @@ class RealCategoryController extends Controller
      */
     public function index()
     {
-         $realCtegorie = RealCtegorie::all();
+        $realCtegorie = RealCtegorie::all();
         return view('realCategory.index', compact('realCtegorie'));
     }
 

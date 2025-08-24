@@ -22,6 +22,7 @@ use App\Http\Controllers\RealCategoryController;
 use App\Http\Controllers\BikeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\WarehouseTransferController;
+use App\Http\Controllers\RackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,7 +140,9 @@ Route::get('product-return/{id}/{product_id}/edit', [ReturnProductController::cl
         Route::post('/product/edit', [ProductController::class, 'editproduct'])->name('product.editProduct');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
         Route::get('product/{id}/view', [ProductController::class, 'view'])->name('product.view');
+        Route::get('/admin/products/stock', [ProductController::class, 'stock'])->name('products.stock');
         Route::get('/admin/products/low-stock', [ProductController::class, 'lowStock'])->name('products.lowstock');
+         
         Route::get('/admin/stock/low/ajax', [ProductController::class, 'lowStockAjax'])->name('stock.low.ajax');
 
 
@@ -176,7 +179,8 @@ Route::get('product-return/{id}/{product_id}/edit', [ReturnProductController::cl
 
         Route::resource('real-categories', RealCategoryController::class);
         Route::resource('bikes', BikeController::class);
-        Route::resource('department', DepartmentController::class);
+        Route::resource('rack', RackController::class);
+        Route::resource('sub-department', DepartmentController::class);
 
 
         Route::get('/all-financial', [ExpenseController::class, 'index'])->name('allfinancial');

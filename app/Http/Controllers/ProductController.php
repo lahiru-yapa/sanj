@@ -8,7 +8,12 @@ use App\Models\Supplier;
 use App\Models\Category;
 use App\Models\RealCtegorie;
 use App\Models\Bike;
+use App\Models\RackDetail;
+use App\Models\Department;
+use App\Models\GRNItem;
 use App\Models\ProductWarehouse;
+use App\Models\Warehouse;
+
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -19,11 +24,19 @@ class ProductController extends Controller
         return view('Products.allProducts', compact('products'));
     }
 
+    public function stock(Request $request)
+    {
+        $grnItem = GRNItem::get();
+        $category = Category::get();
+        $warehouse = Warehouse::get();
+        return view('Products.stock', compact('grnItem','warehouse','category'));
+    }
+
 public function lowStock(Request $request)
 {
-    $suppliers = Supplier::all();
-
-    $query = ProductWarehouse::with(['product.grnItems.grn.supplier', 'warehouse'])
+   
+     $suppliers = Supplier::all();
+     $query = ProductWarehouse::with(['product.grnItems.grn.supplier', 'warehouse'])
         ->where('stock', '<', 2);
 
     if ($request->filled('supplier_id')) {
@@ -124,13 +137,14 @@ public function getFilteredProducts2(Request $request)
 
     public function addproduct (Request $request)
     {
+        $subDepartment = Department::get();
         $ctegories = RealCtegorie::get();
-            $bikes = Bike::get();
+        $bikes = Bike::get();
+        $rackDetail = RackDetail::get();
         $brands = Category::where('delete_flag', 0)->get();
         $supllier = Supplier::where('delete_flag', 0)->get();
-       
-       
-        return view('Products.addProducts', compact('supllier','brands','ctegories','bikes'));
+
+        return view('Products.addProducts', compact('supllier','brands','ctegories','bikes','subDepartment','rackDetail'));
     }
 
     public function view($id)
@@ -145,28 +159,35 @@ public function getFilteredProducts2(Request $request)
 
     public function edit($id)
     {
-           $ctegories = RealCtegorie::get();
-            $bikes = Bike::get();
-         $brands = Category::where('delete_flag',0)->get();
+       
         $product = Product::findOrFail($id);
-        $supplier = Supplier::findOrFail($product->supplier_id);
-        $allSuplliers = Supplier::where('delete_flag', 0)->get();
+    
+        // $department = $product->category;
+        // dd($department);
+          $ctegories = RealCtegorie::get();
+          $departments = Department::get();
+         $bikes = Bike::get();
+        $brands = Category::where('delete_flag',0)->get();
+        $rackDetail = RackDetail::get();
+        // $supplier = Supplier::findOrFail($product->supplier_id);
+        // $allSuplliers = Supplier::where('delete_flag', 0)->get();
         
-        return view('Products.editProducts', compact('product','supplier','allSuplliers','brands','ctegories','bikes'));
+        return view('Products.editProducts', compact('product','brands','ctegories','bikes','departments','rackDetail'));
     }
     
     public function store(Request $request)
     {
-      
             // Validation
             $request->validate([
-                // 'price' => 'required|numeric|min:0',
-                'bike' => 'required',
-                'real_brand' => 'required',
-                'brand' => 'required|string',
-                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-                'description' => 'required|string',
                 'name' => 'required|string',
+                'description' => 'required|string',
+                'department' => 'required|integer',
+                'subdepartment' => 'required|integer',
+                'rack_name' => 'required',
+                'category' => 'required|integer',
+                'subCategory' => 'required|integer',
+                'low_stock' => 'required|integer',
+                
             ]);
 
          // Handle file upload
@@ -174,27 +195,26 @@ public function getFilteredProducts2(Request $request)
             if ($request->hasFile('photo')) {
                 $photoPath = $request->file('photo')->store('product_photos', 'public');
             }
-
             $code = $request->input('code');
-            
             if (!empty($code)) {
                 $sku = $code;
             } else {
                 $sku = 'PRD-' . strtoupper(substr($request->input('description'), 0, 3)) . '-' . date('YmdHis');
             }
+         
                 // Store in the database
                 Product::create([
-                    'name'=> $request->name,
-                    'sku' => $sku,
-                    'price' => 0,
-                    'stock' => 0,
-                    'category_id' => $request->brand,
-                    'supplier_id' => 1, // Initial balance is the credit limit
-                    'photo' => $photoPath, 
-                     'sell_price'=>0,
-                    'description'=>$request->description,
-                    'real_category'=>$request->real_brand,
-                    'bike'=>$request->bike,
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'sku' => $request->code,
+                    'description' => $request->department,
+                    'photo' => $photoPath,
+                    'category_id' => $request->department,
+                    'department_id' => $request->subdepartment,
+                    'real_category_id' => $request->category,
+                    'bikes_id' => $request->subCategory,
+                    'low_stock' => $request->low_stock,
+                    'rack_name'=> $request->rack_name,
                 ]);
           
                 return redirect()->route('allproduct')->with('success', 'Shop created successfully!');
@@ -204,15 +224,19 @@ public function getFilteredProducts2(Request $request)
 
     public function editProduct(Request $request)
     {
-         // Validation
-         $request->validate([
-               'bike' => 'required',
-                'real_category' => 'required',
-            'category_id' => 'required|string',
-            'description' => 'required|string',
-            'name' => 'required|string',
-        ]);
-        
+
+        // Validation
+            $request->validate([
+                'name' => 'required|string',
+                'description' => 'required|string',
+                'department' => 'required|integer',
+                'subdepartment' => 'required|integer',
+                'rack_name' => 'required',
+                'category' => 'required|integer',
+                'subCategory' => 'required|integer',
+                'low_stock' => 'required|integer',
+                 ]);
+            dd("fr");
         $product = Product::find($request->Product_id); // Replace `user_id` with the actual field you're using
         //  // Handle file upload
          $photoPath = null;
